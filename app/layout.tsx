@@ -17,11 +17,7 @@ export const metadata: Metadata = {
   description: "Linktree alternative featuring easy link management, authentication, and a responsive design.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id">
       <body
