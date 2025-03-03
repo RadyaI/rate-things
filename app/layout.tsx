@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Link",
-  description: "Linktree alternative featuring easy link management, authentication, and a responsive design.",
+  title: "Rate Things",
+  description: "Upload anything food, clothes, activities and get ratings and comments from others.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
