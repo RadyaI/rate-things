@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import {UserOutlined} from "@ant-design/icons"
+import { UserOutlined } from "@ant-design/icons"
 
 export default function CreateButton() {
     const [toggle, setToggle] = useState(false);
