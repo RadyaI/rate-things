@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { toast, ToastContainer } from "react-toastify";
-import swal from "sweetalert";
+import Link from "next/link";
 
 export default function CreateButton() {
     const [toggle, setToggle] = useState(false);
@@ -58,7 +58,8 @@ export default function CreateButton() {
                     <div onClick={() => setToggle(!toggle)} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><UserOutlined className="text-2xl" /></div>
 
                     <div className={`flex flex-col items-center overflow-hidden transition-all duration-300 ease-in-out ${toggle ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
-                        <button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Profile</button>
+                        <Link href={"/"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Home</button></Link>
+                        <Link href={"/user"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Profile</button></Link>
                         <button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Create</button>
                         <button onClick={() => logOut()} className="bg-[red] transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-[red] px-5 py-2 rounded-lg">Logout</button>
                     </div>
