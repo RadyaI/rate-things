@@ -40,13 +40,14 @@ export default function UserInfo() {
 
     return (
         <>
-            <div className="w-9/12 p-6 mt-10 mx-auto flex gap-6 border border-black">
+            <div className="w-9/12 p-6 mt-10 mx-auto flex gap-6 rounded-4xl shadow shadow-black">
                 <div className="w-[72px] h-[72px]  rounded-full">
                     <Image className="rounded-full" width={72} height={72} src={userData.photoUrl} alt={userData.displayName} />
                 </div>
-                <div className="w-1/2 border border-black">
-                    <p>{userData?.displayName}</p>
+                <div className="w-1/2">
+                    <p className="text-xl sm:text-3xl">{userData?.displayName}</p>
                     <p>{userData?.email}</p>
+                    <small>0 Posts</small>
                 </div>
             </div>
         </>
