@@ -7,8 +7,10 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from
 import { auth } from "@/config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CreateButton() {
+    const router = useRouter()
     const [toggle, setToggle] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(true);
 
@@ -18,6 +20,7 @@ export default function CreateButton() {
                 setIsLoggedIn(true)
             } else {
                 setIsLoggedIn(false)
+                router.push("/")
             }
         })
 
