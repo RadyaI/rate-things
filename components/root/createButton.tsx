@@ -25,7 +25,7 @@ export default function CreateButton() {
         })
 
         return () => subs()
-    }, [])
+    }, [router])
 
     async function loginGoogle() {
         try {
@@ -33,9 +33,11 @@ export default function CreateButton() {
             await signInWithPopup(auth, provider)
 
             toast.success("Login successfully.")
-        } catch (error: any) {
-            console.log(error.message)
-            toast.error("Something went wrong.")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.log(error.message)
+                toast.error("Something went wrong.")
+            }
         }
     }
 
@@ -43,9 +45,11 @@ export default function CreateButton() {
         try {
             await signOut(auth)
             toast.success("Logout successfully")
-        } catch (error: any) {
-            console.log(error.message)
-            toast.error("Something went wrong.")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.log(error.message)
+                toast.error("Something went wrong.")
+            }
         }
     }
 

@@ -36,11 +36,11 @@ export default function UserInfo() {
         })
 
         return () => subs()
-    }, [])
+    }, [router])
 
     return (
         <>
-            <div className="w-9/12 p-6 mt-10 mx-auto flex flex-col sm:flex-row gap-6 rounded-4xl shadow shadow-black">
+            <div className="w-9/12 p-6 bg-amber-50 mt-10 mx-auto flex flex-col sm:flex-row gap-6 rounded-4xl shadow shadow-black">
                 <div className="w-[72px] h-[72px]  rounded-full">
                     <Image className="rounded-full" width={72} height={72} src={userData.photoUrl} alt={userData.displayName} />
                 </div>
