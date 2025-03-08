@@ -6,7 +6,7 @@ import Image from "next/image"
 export default function Content() {
     return (
         <>
-            <div className="w-[90%] mx-auto mt-4 p-10 flex gap-5 flex-wrap">
+            <div className="w-full sm:w-[90%] mx-auto mt-4 p-5 sm:p-10 flex justify-center gap-5 flex-wrap">
 
                 <div className="w-full m-1 sm:w-[300px] bg-[#FBF8EF] rounded-2xl shadow-md h-[350px] p-4 cursor-pointer hover:scale-[1.1] transition-all">
                     <div className="w-full flex gap-3 font-semibold select-none">
