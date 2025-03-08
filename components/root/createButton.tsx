@@ -67,7 +67,7 @@ export default function CreateButton() {
                     <div className={`flex flex-col items-center overflow-hidden transition-all duration-300 ease-in-out ${toggle ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
                         <Link href={"/"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Home</button></Link>
                         <Link href={"/user"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Profile</button></Link>
-                        <button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Create</button>
+                        <Link href={"/create"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Create</button></Link>
                         <button onClick={() => logOut()} className="bg-[red] transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-[red] px-5 py-2 rounded-lg">Logout</button>
                     </div>
                 </>)}
