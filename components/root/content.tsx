@@ -14,7 +14,7 @@ export default function Content() {
                         <p className="bg-green-400 shadow shadow-[grey] p-1 px-2 rounded-md">Activity</p>
                     </div>
                     <div className="w-full mb-2 h-[60%] relative mt-3">
-                        <Image src="/coding.jpg" fill className="select-none object-fit rounded-2xl" alt="Photo"></Image>
+                        <Image src="/coding.jpg" sizes="100%" priority={true} fill className="select-none object-fit rounded-2xl" alt="Photo"></Image>
                     </div>
                     <small>Muhammad Radya Iftikhar</small>
                     <p className="font-semibold">Ngoding coy</p>
