@@ -22,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="id">
       <head>
+        <link rel="shortcut icon" href="/vercel.svg" type="image/x-icon" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Chewy&family=Caveat:wght@400..700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
