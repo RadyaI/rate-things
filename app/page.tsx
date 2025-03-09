@@ -8,7 +8,7 @@ export default function Home() {
         <p className="hidden sm:block text-center text-5xl font-bold tracking-wider font-[chewy]">⭐ Rate anything you want ⭐</p>
         <p className="sm:hidden text-center text-5xl font-bold tracking-wider font-[chewy]">Rate anything you want</p>
       </div>
-      <Suspense fallback={<div className="text-center">Sabar yaa...</div>}>
+      <Suspense fallback={<div className="text-center">Sabar yaa lagi ambil data...</div>}>
         <Content/>
       </Suspense>
     </>
