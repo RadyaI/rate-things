@@ -2,17 +2,29 @@ import { db } from "@/config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 
+type Things = {
+    author: string,
+    authorId: string,
+    createdAt: string,
+    desc: string,
+    file: string,
+    isAnonim: boolean,
+    tag: string,
+    title: string
+} | null
 
-async function getThings(thingsId: string): Promise<any> {
+async function getThings(thingsId: string): Promise<Things> {
     try {
         const data = await getDoc(doc(db, "things", thingsId))
-        return data.data()
+        return data.data() as Things
     } catch (error: unknown) {
         if (error instanceof Error) {
-            return error.message
+            console.log(error.message)
+            return null
         }
     }
-    return thingsId;
+
+    return null;
 }
 
 export default async function ThingsView({ params }: { params: Promise<{ id: string }> }) {
@@ -20,7 +32,15 @@ export default async function ThingsView({ params }: { params: Promise<{ id: str
     const { id } = await params;
 
     const thingsData = await getThings(id)
-    console.log(thingsData)
+    
+    if(!thingsData){
+        return(
+            <>
+                <p className="text-center">Data not found huh?...</p>
+            </>
+        )
+    }
+
     return (
         <>
             <div className="w-6/8 h-50 sm:h-80 sm:w-1/2 mt-5 mx-auto relative">
