@@ -7,10 +7,21 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 
+type Things = {
+    id: string,
+    author: string,
+    authorId: string,
+    createdAt: string,
+    desc: string,
+    file: string,
+    isAnonim: boolean,
+    tag: string,
+    title: string
+}
+
 export default function Content() {
 
-
-    const [thingsData, setThingsData] = useState<any[]>()
+    const [thingsData, setThingsData] = useState<Things[]>()
 
     async function getThings() {
         try {
@@ -18,9 +29,9 @@ export default function Content() {
                 collection(db, "things"),
                 orderBy("createdAt", "desc")
             ), (snapshot) => {
-                let temp: any[] = []
+                const temp: Things[] = []
                 snapshot.forEach((data) => {
-                    temp.push({ ...data.data(), id: data.id })
+                    temp.push({ ...data.data() as Things, id: data.id })
                 })
                 setThingsData(temp)
             })

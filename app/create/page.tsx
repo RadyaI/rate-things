@@ -4,23 +4,25 @@ import { auth, db } from '@/config/firebase'
 import { CheckOutlined } from '@ant-design/icons'
 import { addDoc, collection, Timestamp } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function CreateThings() {
     const router = useRouter()
     const [checked, setChecked] = useState<boolean>(false)
-    const [loading, setLoading] = useState<boolean>(false)
 
     const [title, setTitle] = useState<string>("")
     const [tag, setTag] = useState<string>("")
     const [desc, setDesc] = useState<string>("")
-    const [file, setFile] = useState<File | null>(null);
+    const [file, setFile] = useState<File | null | undefined>(null);
 
-    function handleFile(e: any) {
+    function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
         try {
-            const imgType = e.target.files[0].type
-            const imgSize = e.target.files[0].size
+            const file = e.target.files?.[0]
+            if (!file) return;
+
+            const imgType = file.type
+            const imgSize = file.size
             const max_size = 10 * 1024 * 1024
             if (imgType !== "image/webp" && imgType !== "image/png" && imgType !== "image/jpeg" && imgType !== "image/jpg") {
                 toast.error("Support only webp/png/jpeg/jpg")
@@ -31,11 +33,10 @@ export default function CreateThings() {
             }
             else {
                 toast.success("Uploaded")
-                setFile(e.target.files[0])
+                setFile(file)
             }
-
         } catch (error: unknown) {
-            if (error instanceof Error) console.log(error)
+            if (error instanceof Error) console.log(error.message)
         }
     }
 
@@ -43,13 +44,12 @@ export default function CreateThings() {
         if (!title || !desc || !file) {
             toast.error("Some fields are required!");
             return;
-        } else if(tag.length > 10){
+        } else if (tag.length > 10) {
             toast.error("Tag maximum 10 characters!")
             return;
         }
 
         try {
-            setLoading(true);
             toast.info("Loading...")
             const formData = new FormData();
             formData.append("file", file);
@@ -78,10 +78,12 @@ export default function CreateThings() {
 
             toast.success("Created successfully");
             router.push("/");
-        } catch (error) {
+        } catch (error: unknown) {
             toast.error("Something went wrong!");
+            if (error instanceof Error) {
+                console.log(error.message)
+            }
         } finally {
-            setLoading(false);
         }
     };
 
