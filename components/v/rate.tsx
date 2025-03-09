@@ -12,6 +12,7 @@ export default function Rate({ getThingsId }: { getThingsId: { id: string } }) {
 
     useEffect(() => {
         console.log(rating)
+        console.log(thingsId)
     }, [rating])
 
     return (
