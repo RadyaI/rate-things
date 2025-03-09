@@ -29,10 +29,10 @@ export default function CreateButton() {
 
     async function loginGoogle() {
         try {
+            
             const provider = new GoogleAuthProvider()
             await signInWithPopup(auth, provider)
-
-            toast.success("Login successfully.")
+            toast.success("Login successfully.", {toastId: "google-login"})
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.log(error.message)
@@ -60,7 +60,7 @@ export default function CreateButton() {
                 theme="dark"
             />
             <div className="fixed w-34 p-4 top-2 right-[-20px] sm:right-2 flex flex-col items-center">
-                {!isLoggedIn && (<div onClick={() => loginGoogle()} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><FcGoogle className="text-2xl" /></div>)}
+                {!isLoggedIn && (<div onClick={loginGoogle} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><FcGoogle className="text-2xl" /></div>)}
                 {isLoggedIn && (<>
                     <div onClick={() => setToggle(!toggle)} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><UserOutlined className="text-2xl" /></div>
 
@@ -68,7 +68,7 @@ export default function CreateButton() {
                         <Link href={"/"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Home</button></Link>
                         <Link href={"/user"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Profile</button></Link>
                         <Link href={"/create"}><button className="bg-black transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-black px-5 py-2 rounded-lg">Create</button></Link>
-                        <button onClick={() => logOut()} className="bg-[red] transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-[red] px-5 py-2 rounded-lg">Logout</button>
+                        <button onClick={logOut} className="bg-[red] transition-all mt-4 text-white cursor-pointer hover:bg-[#F1F0E9] border-2 hover:text-black hover:border-[red] px-5 py-2 rounded-lg">Logout</button>
                     </div>
                 </>)}
             </div>
