@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify'
 export default function CreateThings() {
     const router = useRouter()
     const [checked, setChecked] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const [title, setTitle] = useState<string>("")
     const [tag, setTag] = useState<string>("")
@@ -48,7 +49,7 @@ export default function CreateThings() {
             toast.error("Tag maximum 10 characters!")
             return;
         }
-
+        setIsLoading(true)
         try {
             toast.info("Loading...")
             const formData = new FormData();
@@ -84,6 +85,7 @@ export default function CreateThings() {
                 console.log(error.message)
             }
         } finally {
+            setIsLoading(false)
         }
     };
 
@@ -124,7 +126,7 @@ export default function CreateThings() {
             </div>
 
             <div className="w-[80%] sm:w-4/6 mb-10 mt-5 h-auto mx-auto">
-                <button onClick={() => createSomethings()} className='cursor-pointer py-2 px-5 hover:scale-[1.1] transition-all rounded-md shadow shadow-black outline-none   font-semibold bg-amber-50'>Create</button>
+                <button onClick={() => createSomethings()} className='cursor-pointer py-2 px-5 hover:scale-[1.1] transition-all rounded-md shadow shadow-black outline-none   font-semibold bg-amber-50'>{isLoading ? "Sabar yaa" : "Create"}</button>
             </div>
 
         </>

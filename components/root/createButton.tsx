@@ -59,7 +59,7 @@ export default function CreateButton() {
                 position="bottom-right"
                 theme="dark"
             />
-            <div className="fixed w-34 p-4 top-2 right-[-20px] sm:right-2 flex flex-col items-center">
+            <div className="fixed z-[999] w-34 p-4 top-2 right-[-20px] sm:right-2 flex flex-col items-center">
                 {!isLoggedIn && (<div onClick={loginGoogle} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><FcGoogle className="text-2xl" /></div>)}
                 {isLoggedIn && (<>
                     <div onClick={() => setToggle(!toggle)} className="w-12 h-12 rounded-full cursor-pointer bg-black text-white flex justify-center items-center"><UserOutlined className="text-2xl" /></div>

@@ -70,7 +70,7 @@ export default function UserPosts() {
                             <p className="bg-green-400 shadow shadow-[grey] p-1 px-2 rounded-md">{i.tag}</p>
                         </div>
                         <div className="w-full mb-2 h-[60%] relative mt-3">
-                            <Image src={i.file} sizes="100%" priority={true} fill className="select-none object-fit rounded-2xl" alt="Photo"></Image>
+                            <Image src={i.file} sizes="100%" priority={true} fill className="select-none object-cover hover:object-contain rounded-2xl" alt="Photo"></Image>
                         </div>
                         <small>{i.isAnonim ? "Someone" : i.author}</small>
                         <p className="font-semibold">{i.title}</p>
