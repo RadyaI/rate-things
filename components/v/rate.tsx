@@ -5,8 +5,9 @@ import { CloseOutlined, StarFilled } from "@ant-design/icons"
 import "animate.css"
 
 export default function Rate({ getThingsId }: { getThingsId: { id: string } }) {
-
-    const [thingsId, setThingsId] = useState<string>(getThingsId.id)
+    
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [thingsId, _] = useState<string>(getThingsId.id)
     const [toggleModal, setToggleModal] = useState<boolean>(false)
     const [rating, setRating] = useState<number>(1)
 
