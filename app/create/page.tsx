@@ -1,28 +1,89 @@
 "use client"
 
+import { auth, db } from '@/config/firebase'
 import { CheckOutlined } from '@ant-design/icons'
-import React, { useState } from 'react'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function CreateThings() {
-
+    const router = useRouter()
     const [checked, setChecked] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
+
+    const [title, setTitle] = useState<string>("")
+    const [tag, setTag] = useState<string>("")
+    const [desc, setDesc] = useState<string>("")
+    const [file, setFile] = useState<File | null>(null);
 
     function handleFile(e: any) {
         try {
-            console.log(e.target.files[0])
             const imgType = e.target.files[0].type
+            const imgSize = e.target.files[0].size
+            const max_size = 10 * 1024 * 1024
             if (imgType !== "image/webp" && imgType !== "image/png" && imgType !== "image/jpeg" && imgType !== "image/jpg") {
                 toast.error("Support only webp/png/jpeg/jpg")
                 e.target.value = ""
-            } else {
+            } else if (imgSize > max_size) {
+                toast.error("Max 10MB")
+                e.target.value = ""
+            }
+            else {
                 toast.success("Uploaded")
+                setFile(e.target.files[0])
             }
 
         } catch (error: unknown) {
             if (error instanceof Error) console.log(error)
         }
     }
+
+    async function createSomethings() {
+        if (!title || !desc || !file) {
+            toast.error("Some fields are required!");
+            return;
+        } else if(tag.length > 10){
+            toast.error("Tag maximum 10 characters!")
+            return;
+        }
+
+        try {
+            setLoading(true);
+            toast.info("Loading...")
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "ratethings");
+            formData.append("folder", "ratethings")
+
+            const res = await fetch(`https://api.cloudinary.com/v1_1/dmjcabiqr/image/upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!res.ok) throw new Error("Upload failed");
+
+            const { secure_url } = await res.json();
+
+            await addDoc(collection(db, "things"), {
+                title,
+                isAnonim: checked,
+                author: auth.currentUser?.displayName,
+                authorId: auth.currentUser?.uid,
+                desc,
+                tag,
+                file: secure_url,
+                createdAt: Timestamp.now().toMillis()
+            });
+
+            toast.success("Created successfully");
+            router.push("/");
+        } catch (error) {
+            toast.error("Something went wrong!");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <>
@@ -32,7 +93,10 @@ export default function CreateThings() {
             />
             <p className="text-center text-4xl font-semibold mt-6">Create <br /> Somethings</p>
             <div className="w-[80%] sm:w-4/6 mt-10 h-auto bg-amber-50 shadow shadow-black mx-auto rounded-2xl">
-                <input type="text" placeholder="Input title..." className="w-full p-4 outline-none text-lg" />
+                <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Input title..." className="w-full p-4 outline-none text-lg" />
+            </div>
+            <div className="w-[80%] sm:w-4/6 mt-5 h-auto bg-amber-50 shadow shadow-black mx-auto rounded-2xl">
+                <input value={tag} onChange={(e) => setTag(e.target.value)} type="text" placeholder="Tag (example: Activity, Food)" className="w-full p-4 outline-none text-lg" />
             </div>
 
             <div className="w-[80%] sm:w-4/6 mx-auto mt-8 flex items-center space-x-3">
@@ -54,11 +118,11 @@ export default function CreateThings() {
             </div>
 
             <div className="w-[80%] sm:w-4/6 mt-5 h-auto bg-amber-50 shadow shadow-black mx-auto rounded-2xl">
-                <textarea className="w-full p-4 outline-none text-lg" placeholder='Description...'></textarea>
+                <textarea value={desc} onChange={(e) => setDesc(e.target.value)} className="w-full p-4 outline-none text-lg" placeholder='Description...'></textarea>
             </div>
 
-            <div className="w-[80%] sm:w-4/6 mt-5 h-auto mx-auto">
-                <button className='cursor-pointer py-2 px-5 hover:scale-[1.1] transition-all rounded-md shadow shadow-black outline-none   font-semibold bg-amber-50'>Create</button>
+            <div className="w-[80%] sm:w-4/6 mb-10 mt-5 h-auto mx-auto">
+                <button onClick={() => createSomethings()} className='cursor-pointer py-2 px-5 hover:scale-[1.1] transition-all rounded-md shadow shadow-black outline-none   font-semibold bg-amber-50'>Create</button>
             </div>
 
         </>
