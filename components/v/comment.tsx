@@ -54,7 +54,7 @@ export default function Comment({ getThingsId }: { getThingsId: { id: string } }
 
     return (
         <>
-            <div className="w-6/8 sm:w-1/2 mb-10 mx-auto mt-5 p-5 bg-amber-50 rounded-2xl shadow shadow-black">
+            <div className="w-[90%] sm:w-1/2 mb-10 mx-auto mt-5 p-5 bg-amber-50 rounded-2xl shadow shadow-black">
                 <small>Comment</small>
                 {ratingData?.map((i, index) =>
                     <div key={index} className="mt-4 shadow p-3 rounded-xl">

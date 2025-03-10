@@ -49,7 +49,7 @@ export default async function ThingsView({ params }: { params: Promise<{ id: str
             <div className="w-6/8 h-50 sm:h-80 sm:w-1/2 mt-5 mx-auto relative">
                 <Image className="mt-3 object-contain mx-auto rounded-2xl" fill src={thingsData.file} alt="Image"></Image>
             </div>
-            <div className="w-6/8 sm:w-1/2 mt-10 mx-auto bg-amber-50 p-5 rounded-2xl shadow shadow-black">
+            <div className="w-[90%] sm:w-1/2 mt-10 mx-auto bg-amber-50 p-5 rounded-2xl shadow shadow-black">
                 <div className="flex flex-wrap mb-3 gap-4 font-semibold">
                     <p className="bg-amber-400 p-1 px-2 rounded-md">{new Date(thingsData.createdAt).toLocaleString("id-ID", {
                         day: "2-digit",
