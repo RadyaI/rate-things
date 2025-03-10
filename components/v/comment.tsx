@@ -1,7 +1,7 @@
 "use client"
 
 import { db } from "@/config/firebase"
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 
 type Things = {
@@ -19,28 +19,23 @@ export default function Comment({ getThingsId }: { getThingsId: { id: string } }
 
 
     useEffect(() => {
-        async function getRating() {
-            try {
-                const get = await getDocs(query(
-                    collection(db, "rating"),
-                    where("thingsId", "==", getThingsId.id),
-                    orderBy("createdAt", "desc")
-                ))
-                const temp: Things[] = []
-                get.forEach((data) => {
-                    temp.push({ ...data.data(), id: data.id } as Things)
-                })
-                setRatingData(temp)
-    
-            } catch (error: unknown) {
-                if (error instanceof Error) {
-                    console.log(error.message)
-                }
-            }
-        }
+        const q = query(
+            collection(db, "rating"),
+            where("thingsId", "==", getThingsId.id),
+            orderBy("createdAt", "desc")
+        );
 
-        getRating()
-    }, [getThingsId.id])
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const temp: Things[] = [];
+            snapshot.forEach((data) => {
+                temp.push({ ...data.data(), id: data.id } as Things);
+            });
+            setRatingData(temp);
+        });
+
+        return () => unsubscribe();
+    }, [getThingsId.id]);
+
 
     if (!ratingData) {
         return (
@@ -50,7 +45,7 @@ export default function Comment({ getThingsId }: { getThingsId: { id: string } }
             </div>
         )
     }
-    
+
 
     return (
         <>
