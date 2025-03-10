@@ -73,6 +73,7 @@ export default function CreateThings() {
                 authorId: auth.currentUser?.uid,
                 desc,
                 tag,
+                rating: 0,
                 file: secure_url,
                 createdAt: Timestamp.now().toMillis()
             });
