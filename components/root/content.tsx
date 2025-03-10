@@ -66,7 +66,7 @@ export default function Content() {
                         </div>
                         <small>{i.isAnonim ? "Someone" : i.author}</small>
                         <p className="font-semibold">{i.title}</p>
-                        <p className="mt-1 text-yellow-500"> <StarFilled></StarFilled> <span className="text-black">{i.rating}/5</span></p>
+                        <p className="mt-1 text-yellow-500"> <StarFilled></StarFilled> <span className="text-black">{i.rating.toFixed(1)}/5</span></p>
                     </div>
                 )}
             </div>

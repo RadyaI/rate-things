@@ -53,7 +53,7 @@ export default function Comment({ getThingsId }: { getThingsId: { id: string } }
                 <small>Comment</small>
                 {ratingData?.map((i, index) =>
                     <div key={index} className="mt-4 shadow p-3 rounded-xl">
-                        <p className="font-semibold">{i?.komen}</p>
+                        <p className="font-semibold">{i?.komen === "no-comment" ? "No Comment" : i?.komen} <small>({i?.rating} / 5)</small></p>
                         <small className="text-[grey]">{new Date(i?.createdAt ?? 0).toLocaleString("id-ID", {
                             day: "2-digit",
                             month: "short",
