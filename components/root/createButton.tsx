@@ -32,7 +32,6 @@ export default function CreateButton() {
             
             const provider = new GoogleAuthProvider()
             await signInWithPopup(auth, provider)
-            toast.success("Login successfully.", {toastId: "google-login"})
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.log(error.message)
