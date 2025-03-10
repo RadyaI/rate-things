@@ -13,6 +13,7 @@ type Things = {
     author: string,
     authorId: string,
     createdAt: string,
+    rating: number,
     desc: string,
     file: string,
     isAnonim: boolean,
@@ -65,7 +66,7 @@ export default function Content() {
                         </div>
                         <small>{i.isAnonim ? "Someone" : i.author}</small>
                         <p className="font-semibold">{i.title}</p>
-                        <p className="mt-1 text-yellow-500"> <StarFilled></StarFilled> <span className="text-black">3.4/5</span></p>
+                        <p className="mt-1 text-yellow-500"> <StarFilled></StarFilled> <span className="text-black">{i.rating}/5</span></p>
                     </div>
                 )}
             </div>
