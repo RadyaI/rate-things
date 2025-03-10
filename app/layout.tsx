@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins, Chewy, Caveat } from "next/font/google";
 import "./globals.css";
 import CreateButton from "@/components/root/createButton";
+import ProgressLoaders from "@/components/Loaders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${chewy.variable} ${caveat.variable} antialiased`}
       >
+        <ProgressLoaders />
         <CreateButton />
         {children}
       </body>
