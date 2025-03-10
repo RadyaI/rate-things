@@ -49,6 +49,13 @@ export default function Content() {
         getThings()
     }, [])
 
+    useEffect(() => {
+        thingsData?.forEach((i) => {
+            router.prefetch(`/v/${i.id}`);
+        });
+    }, [thingsData]);
+    
+
     if (!thingsData) return <div className="text-center">Sabar yaa lagi ambil data...</div>;
 
     return (
